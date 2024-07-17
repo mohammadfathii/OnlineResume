@@ -6,7 +6,6 @@ namespace OnlineResume.Controllers
 	[Authorize]
 	public class PanelController : Controller
 	{
-		[Authorize]
 		public IActionResult Index()
 		{
 			return View();
