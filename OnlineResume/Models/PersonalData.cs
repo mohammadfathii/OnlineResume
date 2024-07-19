@@ -13,7 +13,7 @@ namespace OnlineResume.Models
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
         public string AboutMe { get; set; }
-        public Gender Gender { get; set; }
+        public Gender Gender { get; set; } = Gender.Male;
 
         public virtual ICollection<Education> Educations { get; set; }
         public virtual ICollection<Experience> Experiences { get; set; }

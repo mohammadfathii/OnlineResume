@@ -1,0 +1,39 @@
+﻿@model List<Language>
+@{
+    Layout = "_PanelLayout";
+}
+
+<a asp-controller="Panel" asp-action="CreateLanguage" class="btn btn-success">Create New</a>
+
+<br />
+<hr />
+<br />
+
+<table class="table table-striped">
+
+    <thead>
+        <tr>
+            <th>#Id</th>
+            <th>Name</th>
+            <th>Skill Rate</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var language in Model)
+        {
+            <tr>
+                <td>@language.Id</td>
+                <td>@language.Name</td>
+                <td>@language.SkillRate</td>
+                <td class="btn-group">
+                    <a class="btn btn-danger" asp-controller="Panel" asp-action="RemoveLanguage" asp-route-id="@language.Id">Remove</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+

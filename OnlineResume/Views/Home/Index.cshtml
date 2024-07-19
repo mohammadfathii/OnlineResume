@@ -34,7 +34,7 @@
 						<ul class="resume-contact-list list-unstyled list-inline mb-0 justify-content-between">
 							<li class="list-inline-item me-md-3 me-lg-5"><i class="resume-contact-icon bi bi-telephone-inbound me-2"></i> +98 @Model.PhoneNumber</li>
 							<li class="list-inline-item me-md-3 me-lg-5"><i class="resume-contact-icon bi bi-envelope me-2"></i> @Model.Email</li>
-							<li class="list-inline-item me-lg-5"><i class="resume-contact-icon bi bi-globe me-2"></i> www.mohammadfathiresume.ir</li>
+							<li class="list-inline-item me-lg-5"><i class="resume-contact-icon bi bi-globe me-2"></i> www.fathimohammad.ir</li>
 						</ul>
 					</div><!--//resume-contact-->
 				</div><!--//profile-holder-->
@@ -155,7 +155,7 @@
 									{
 										<li class="mb-2">
 											<div class="resume-degree font-weight-bold">@project.Title</div>
-											<div class="resume-degree-org"><img src="~/assets/images/@project.Image" width="400" height="400" /></div>
+											<div class="resume-degree-org"><img src="~/assets/images/@project.Image" width="100" height="100" /></div>
 										</li>
 									}
 								}
@@ -172,9 +172,9 @@
 									@foreach (var language in Model.Languages)
 									{
 										<li class="mb-2">
-											<div class="resume-lang-name">@language.Name</div>
+											<div class="resume-lang-name">@language.Name (@language.SkillRate)</div>
 											<div class="resume-level-indicator row gx-0 flex-nowrap">
-												@for (var i = 1; i <= ((int)language.SkillRate); i++)
+												@for (var i = 0; i <= ((int)language.SkillRate); i++)
 												{
 													<div class="col"><span class="item item-full"></span></div>
 												}

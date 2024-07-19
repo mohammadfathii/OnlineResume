@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OnlineResume.Models
 {
@@ -10,5 +11,11 @@ namespace OnlineResume.Models
 		public string Name { get; set; }
 
 		public Rate SkillRate { get; set; } = Rate.Good;
+
+
+        public int PersonalDataId { get; set; }
+
+        [ForeignKey(nameof(PersonalDataId))]
+        public virtual PersonalData PersonalData { get; set; }
     }
 }

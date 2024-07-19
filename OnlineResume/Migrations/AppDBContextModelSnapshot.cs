@@ -34,7 +34,7 @@ namespace OnlineResume.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("PersonalDataId")
+                    b.Property<int>("PersonalDataId")
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
@@ -60,7 +60,7 @@ namespace OnlineResume.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("PersonalDataId")
+                    b.Property<int>("PersonalDataId")
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
@@ -86,7 +86,7 @@ namespace OnlineResume.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("PersonalDataId")
+                    b.Property<int>("PersonalDataId")
                         .HasColumnType("int");
 
                     b.Property<int>("SkillRate")
@@ -142,7 +142,7 @@ namespace OnlineResume.Migrations
                             Id = 1,
                             AboutMe = "test",
                             Age = 18,
-                            BirthDay = new DateTime(2024, 7, 17, 4, 31, 9, 622, DateTimeKind.Local).AddTicks(4559),
+                            BirthDay = new DateTime(2024, 7, 17, 9, 14, 20, 966, DateTimeKind.Local).AddTicks(839),
                             Email = "m_fathi65@yahoo.com",
                             FullName = "Mohammad Fathi",
                             Gender = 0,
@@ -162,7 +162,7 @@ namespace OnlineResume.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("PersonalDataId")
+                    b.Property<int>("PersonalDataId")
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
@@ -192,7 +192,7 @@ namespace OnlineResume.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("PersonalDataId")
+                    b.Property<int>("PersonalDataId")
                         .HasColumnType("int");
 
                     b.Property<int?>("ProjectId")
@@ -218,7 +218,7 @@ namespace OnlineResume.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("PersonalDataId")
+                    b.Property<int>("PersonalDataId")
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
@@ -268,48 +268,72 @@ namespace OnlineResume.Migrations
 
             modelBuilder.Entity("OnlineResume.Models.Education", b =>
                 {
-                    b.HasOne("OnlineResume.Models.PersonalData", null)
+                    b.HasOne("OnlineResume.Models.PersonalData", "PersonalData")
                         .WithMany("Educations")
-                        .HasForeignKey("PersonalDataId");
+                        .HasForeignKey("PersonalDataId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("PersonalData");
                 });
 
             modelBuilder.Entity("OnlineResume.Models.Experience", b =>
                 {
-                    b.HasOne("OnlineResume.Models.PersonalData", null)
+                    b.HasOne("OnlineResume.Models.PersonalData", "PersonalData")
                         .WithMany("Experiences")
-                        .HasForeignKey("PersonalDataId");
+                        .HasForeignKey("PersonalDataId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("PersonalData");
                 });
 
             modelBuilder.Entity("OnlineResume.Models.Language", b =>
                 {
-                    b.HasOne("OnlineResume.Models.PersonalData", null)
+                    b.HasOne("OnlineResume.Models.PersonalData", "PersonalData")
                         .WithMany("Languages")
-                        .HasForeignKey("PersonalDataId");
+                        .HasForeignKey("PersonalDataId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("PersonalData");
                 });
 
             modelBuilder.Entity("OnlineResume.Models.Project", b =>
                 {
-                    b.HasOne("OnlineResume.Models.PersonalData", null)
+                    b.HasOne("OnlineResume.Models.PersonalData", "PersonalData")
                         .WithMany("Projects")
-                        .HasForeignKey("PersonalDataId");
+                        .HasForeignKey("PersonalDataId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("PersonalData");
                 });
 
             modelBuilder.Entity("OnlineResume.Models.Skill", b =>
                 {
-                    b.HasOne("OnlineResume.Models.PersonalData", null)
+                    b.HasOne("OnlineResume.Models.PersonalData", "PersonalData")
                         .WithMany("Skills")
-                        .HasForeignKey("PersonalDataId");
+                        .HasForeignKey("PersonalDataId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("OnlineResume.Models.Project", null)
                         .WithMany("Skills")
                         .HasForeignKey("ProjectId");
+
+                    b.Navigation("PersonalData");
                 });
 
             modelBuilder.Entity("OnlineResume.Models.SoftSkills", b =>
                 {
-                    b.HasOne("OnlineResume.Models.PersonalData", null)
+                    b.HasOne("OnlineResume.Models.PersonalData", "PersonalData")
                         .WithMany("SoftSkills")
-                        .HasForeignKey("PersonalDataId");
+                        .HasForeignKey("PersonalDataId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("PersonalData");
                 });
 
             modelBuilder.Entity("OnlineResume.Models.PersonalData", b =>

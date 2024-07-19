@@ -1,0 +1,39 @@
+﻿@using OnlineResume.Models.ViewModels.Language;
+@model CreateLanguageViewModel;
+@{
+    Layout = "_PanelLayout";
+
+    var selectListItem = new List<SelectListItem>();
+
+    selectListItem.Add(new SelectListItem("VeryBad", "0"));
+    selectListItem.Add(new SelectListItem("Bad","1"));
+    selectListItem.Add(new SelectListItem("Good", "2"));
+    selectListItem.Add(new SelectListItem("VeryGood", "3"));
+    selectListItem.Add(new SelectListItem("Excellent", "4"));
+    selectListItem.Add(new SelectListItem("Perefect", "5"));
+
+
+}
+
+
+<form asp-controller="Panel" asp-action="CreateLanguage" method="post">
+
+    <div class="form-group">
+        <label class="form-label" for="Name">Name : </label>
+        <input type="text" asp-for="@Model.Name" class="form-control"/>
+
+    </div>
+    <div class="form-group">
+        <label class="form-label" for="SkillRate">Skill Rate : </label>
+        <select asp-for="@Model.SkillRate" asp-items="@selectListItem" class="form-control">
+
+        </select>
+
+    </div>
+    <div class="form-group">
+        <button class="btn btn-success">Create</button>
+    </div>
+
+</form>
+
+

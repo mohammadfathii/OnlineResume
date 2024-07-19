@@ -1,0 +1,42 @@
+﻿@model List<Education>
+@{
+    Layout = "_PanelLayout";
+}
+
+<h1>Educations : </h1>
+
+<a class="btn btn-success" asp-controller="Panel" asp-action="CreateEducation">Create New</a>
+
+<br />
+<hr />
+<br />
+
+<table class="table table-striped">
+
+    <thead>
+        <tr>
+            <th>#Id</th>
+            <th>Title</th>
+            <th>Image</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @foreach (var education in Model)
+        {
+            <tr>
+                <td>@education.Id</td>
+                <td>@education.Title</td>
+                <td><img src="~/images/educations/@education.Image" /></td>
+                <td class="btn-group">
+                    <a class="btn btn-danger" asp-controller="Panel" asp-action="RemoveEducation" asp-route-id="@education.Id">Remove</a>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+
+</table>
+
