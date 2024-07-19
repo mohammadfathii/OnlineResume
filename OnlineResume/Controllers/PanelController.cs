@@ -6,6 +6,9 @@ using OnlineResume.Models.ViewModels.Education;
 using OnlineResume.Models.ViewModels.Experience;
 using OnlineResume.Models.ViewModels.Language;
 using OnlineResume.Models.ViewModels.PersonalData;
+using OnlineResume.Models.ViewModels.Project;
+using OnlineResume.Models.ViewModels.Skill;
+using OnlineResume.Models.ViewModels.SoftSkill;
 
 namespace OnlineResume.Controllers
 {
@@ -76,7 +79,7 @@ namespace OnlineResume.Controllers
             context.Experiences.Remove(exp);
             context.SaveChanges();
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Experience");
         }
 
 
@@ -133,7 +136,7 @@ namespace OnlineResume.Controllers
             context.Educations.Remove(edu);
             context.SaveChanges();
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Education");
         }
 
 
@@ -189,7 +192,7 @@ namespace OnlineResume.Controllers
             context.Languages.Remove(lang);
             context.SaveChanges();
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Language");
         }
 
 
@@ -233,7 +236,7 @@ namespace OnlineResume.Controllers
 
 
 
-        public IActionResult Projects()
+        public IActionResult Project()
         {
             var projects = context.Projects.ToList();
 
@@ -246,21 +249,48 @@ namespace OnlineResume.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult CreateProject(Project project)
+        public IActionResult CreateProject(CreateProjectViewModel project)
         {
             if (!ModelState.IsValid)
             {
                 return View(project);
             }
 
-            context.Projects.Add(project);
+            context.Projects.Add(new Models.Project()
+            {
+                Title = project.Title,
+                Description = project.Description,
+                URL = project.URL,
+                Skills = null,
+                PersonalDataId = 1
+            });
+
             context.SaveChanges();
 
-            return RedirectToAction("CreateProject");
+            return RedirectToAction("Index");
         }
 
 
+        public IActionResult RemoveProject(int Id)
+        {
+            if (Id <= 0)
+            {
+                return RedirectToAction("Index");
+            }
 
+            var proj = context.Projects.FirstOrDefault(e => e.Id == Id);
+
+            if (proj == null)
+            {
+                return RedirectToAction("Index");
+            }
+
+
+            context.Projects.Remove(proj);
+            context.SaveChanges();
+
+            return RedirectToAction("Project");
+        }
 
 
         public IActionResult Skills()
@@ -276,25 +306,48 @@ namespace OnlineResume.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult CreateSkill(Skill skill)
+        public IActionResult CreateSkill(CreateSkillViewModel skill)
         {
             if (!ModelState.IsValid)
             {
                 return View(skill);
             }
 
-            context.Skills.Add(skill);
+            context.Skills.Add(new Skill()
+            {
+                Name = skill.Name,
+                SkillRate = skill.SkillRate,
+                PersonalDataId = 1
+            });
             context.SaveChanges();
 
-            return RedirectToAction("CreateSkill");
+            return RedirectToAction("Skills");
         }
 
+		public IActionResult RemoveSkill(int Id)
+		{
+			if (Id <= 0)
+			{
+				return RedirectToAction("Index");
+			}
+
+			var skill = context.Skills.FirstOrDefault(e => e.Id == Id);
+
+			if (skill == null)
+			{
+				return RedirectToAction("Index");
+			}
+
+
+			context.Skills.Remove(skill);
+			context.SaveChanges();
+
+			return RedirectToAction("Skills");
+		}
 
 
 
-
-
-        public IActionResult SoftSkills()
+		public IActionResult SoftSkills()
         {
             var SoftSkills = context.SoftSkills.ToList();
 
@@ -307,18 +360,43 @@ namespace OnlineResume.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult CreateSoftSkill(SoftSkills skill)
+        public IActionResult CreateSoftSkill(CreateSoftSkillViewModel skill)
         {
             if (!ModelState.IsValid)
             {
                 return View(skill);
             }
 
-            context.SoftSkills.Add(skill);
+            context.SoftSkills.Add(new Models.SoftSkills()
+            {
+                Title = skill.Title,
+                PersonalDataId = 1
+            });
             context.SaveChanges();
 
-            return RedirectToAction("CreateSoftSkill");
+            return RedirectToAction("SoftSkills");
         }
 
-    }
+		public IActionResult RemoveSoftSkill(int Id)
+		{
+			if (Id <= 0)
+			{
+				return RedirectToAction("Index");
+			}
+
+			var skill = context.SoftSkills.FirstOrDefault(e => e.Id == Id);
+
+			if (skill == null)
+			{
+				return RedirectToAction("Index");
+			}
+
+
+			context.SoftSkills.Remove(skill);
+			context.SaveChanges();
+
+			return RedirectToAction("SoftSkills");
+		}
+
+	}
 }

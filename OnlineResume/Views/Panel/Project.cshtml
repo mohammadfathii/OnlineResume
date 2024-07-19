@@ -1,0 +1,46 @@
+﻿@model List<Project>;
+@{
+    Layout = "_PanelLayout";
+}
+
+<h1>Projects : </h1>
+
+<a asp-controller="Panel" asp-action="CreateProject" class="btn btn-success">Create New</a>
+<br />
+<hr />
+<br />
+
+
+<table class="table table-striped">
+
+    <thead>
+        <tr>
+            <th>#Id</th>
+            <th>Title</th>
+            <th>URL</th>
+            <th>Number of Skills</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @foreach (var project in Model)
+        {
+            
+            <tr>
+                <td>@project.Id</td>
+                <td>@project.Title</td>
+                <td>@project.URL</td>
+                <td>@((project.Skills != null && project.Skills.Count() > 0) ? project.Skills.Count() : 0)</td>
+                <td class="btn-group">
+                    <a class="btn btn-danger" asp-controller="Panel" asp-action="RemoveProject" asp-route-id="@project.Id">Remove</a>
+                </td>
+            </tr>
+
+        }
+
+    </tbody>
+
+</table>
+

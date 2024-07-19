@@ -1,0 +1,48 @@
+﻿@model List<SoftSkills>
+@{
+    Layout = "_PanelLayout";
+}
+
+<br />
+<a asp-controller="Panel" asp-action="CreateSoftSkill" class="btn btn-success">Create One</a>
+<br />
+<hr />
+<br />
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>#Id</th>
+            <th>Title</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @if (Model.Count > 0 && Model != null)
+        {
+            @foreach (var exp in Model)
+            {
+                <tr>
+                    <td>@exp.Id</td>
+                    <td>@exp.Title</td>
+                    <td class="btn-group">
+                        <a class="btn btn-danger" asp-controller="Panel" asp-action="RemoveSoftSkill" asp-route-id="@exp.Id">Remove</a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td>0</td>
+                <td>not found</td>
+                <td class="btn-group">
+                    <a class="btn btn-danger disabled">Remove</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+

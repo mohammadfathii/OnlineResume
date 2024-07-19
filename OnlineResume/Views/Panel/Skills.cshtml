@@ -1,0 +1,50 @@
+﻿@model List<Skill>
+
+@{
+    Layout = "_PanelLayout";
+}
+
+<a asp-controller="Panel" asp-action="CreateSkill" class="btn btn-block btn-success">Create One</a>
+<br />
+<hr />
+<br />
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>#Id</th>
+            <th>Name</th>
+            <th>Skill Rate</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @if (Model.Count > 0 && Model != null)
+        {
+            @foreach (var skill in Model)
+            {
+                <tr>
+                    <td>@skill.Id</td>
+                    <td>@skill.Name</td>
+                    <td>@skill.SkillRate</td>
+                    <td class="btn-group">
+                        <a class="btn btn-danger" asp-controller="Panel" asp-action="RemoveSkill" asp-route-id="@skill.Id">Remove</a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td>0</td>
+                <td>not found</td>
+                <td>not found</td>
+                <td class="btn-group">
+                    <a class="btn btn-danger disabled">Remove</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>

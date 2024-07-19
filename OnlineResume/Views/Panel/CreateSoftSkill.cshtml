@@ -1,0 +1,19 @@
+﻿@using OnlineResume.Models.ViewModels.SoftSkill;
+@model CreateSoftSkillViewModel;
+@{
+    Layout = "_PanelLayout";
+}
+
+<form asp-controller="Panel" asp-action="CreateSoftSkill" method="post">
+
+    <div class="form-group">
+        <label class="form-label" for="Name">Title : </label>
+        <input type="text" asp-for="@Model.Title" class="form-control"/>
+
+    </div>
+    <div class="form-group">
+        <button class="btn btn-success">Create</button>
+    </div>
+
+</form>
+

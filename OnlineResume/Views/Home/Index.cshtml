@@ -89,7 +89,7 @@
 					<div class="col-12 col-lg-4 ps-lg-4">
 
 						<section class="resume-skills-section resume-section">
-							<h3 class="resume-section-heading text-uppercase py-2 py-lg-3 py-3"><i class="resume-section-heading-icon bi bi-gear me-2"></i>Tech Stack</h3>
+							<h3 class="resume-section-heading text-uppercase py-2 py-lg-3 py-3"><i class="resume-section-heading-icon bi bi-gear me-2"></i>Skills</h3>
 
 							<ul class="list-unstyled">
 								@if (Model.Skills != null)
@@ -97,9 +97,32 @@
 									@foreach (var skill in Model.Skills)
 									{
 										<li class="mb-2">
-											<div class="resume-skill-name">@skill.Name</div>
-											<div class="progress resume-progress" role="progressbar" aria-label="Basic example" aria-valuenow="98" aria-valuemin="0" aria-valuemax="100">
-												<div class="progress-bar resume-progress-bar" style="width: 98%"></div>
+											<div class="resume-skill-name">@skill.Name (@skill.SkillRate)</div>
+											<div class="progress resume-progress" role="progressbar" aria-label="Basic example" aria-valuenow="@(skill.SkillRate)" aria-valuemin="0" aria-valuemax="6">
+												@if (skill.SkillRate == Rate.VeryBad)
+												{
+													<div class="progress-bar resume-progress-bar" style="width: 0%"></div>
+												}
+												else if (skill.SkillRate == Rate.Bad)
+												{
+													<div class="progress-bar resume-progress-bar" style="width: 30%"></div>
+												}
+												else if (skill.SkillRate == Rate.Good)
+												{
+													<div class="progress-bar resume-progress-bar" style="width: 50%"></div>
+												}
+												else if (skill.SkillRate == Rate.VeryGood)
+												{
+													<div class="progress-bar resume-progress-bar" style="width: 70%"></div>
+												}
+												else if (skill.SkillRate == Rate.Excellent)
+												{
+													<div class="progress-bar resume-progress-bar" style="width: 90%"></div>
+												}
+												else
+												{
+													<div class="progress-bar resume-progress-bar" style="width: 100%"></div>
+												}
 											</div>
 										</li>
 									}
