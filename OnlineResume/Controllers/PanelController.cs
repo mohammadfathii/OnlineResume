@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OnlineResume.Data;
+using OnlineResume.Data.Services.Interfaces;
 using OnlineResume.Models;
 using OnlineResume.Models.ViewModels.Education;
 using OnlineResume.Models.ViewModels.Experience;
@@ -16,10 +17,12 @@ namespace OnlineResume.Controllers
 	public class PanelController : Controller
 	{
         private readonly AppDBContext context;
+        private readonly IFileService fileService; 
 
-        public PanelController(AppDBContext context)
+        public PanelController(AppDBContext context,IFileService fileService)
         {
             this.context = context;
+            this.fileService = fileService;
         }
 
         public IActionResult Index()
@@ -97,17 +100,19 @@ namespace OnlineResume.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult CreateEducation(CreateEducationViewModel education)
+        public async Task<IActionResult> CreateEducation(CreateEducationViewModel education)
         {
             if (!ModelState.IsValid)
             {
                 return View(education);
             }
 
+            var file = await fileService.UploadFile(education.Image,"education/");
+
             var educ = new Education()
             {
                 Title = education.Title,
-                Image = "",
+                Image = (file != "" ? file : ""),
                 PersonalDataId = 1
             };
 
@@ -118,7 +123,7 @@ namespace OnlineResume.Controllers
         }
 
 
-        public IActionResult RemoveEducation(int Id)
+        public async Task<IActionResult> RemoveEducation(int Id)
         {
             if (Id <= 0)
             {
@@ -132,6 +137,10 @@ namespace OnlineResume.Controllers
                 return RedirectToAction("Index");
             }
 
+            if (edu.Image != "")
+            {
+                await fileService.RemoveFile("education/" + edu.Image);
+            }
 
             context.Educations.Remove(edu);
             context.SaveChanges();

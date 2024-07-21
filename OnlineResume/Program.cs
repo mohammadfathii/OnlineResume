@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using OnlineResume.Data;
+using OnlineResume.Data.Services;
+using OnlineResume.Data.Services.Interfaces;
 
 namespace OnlineResume
 {
@@ -24,7 +26,9 @@ namespace OnlineResume
                 options.LoginPath = "/Auth/Login";
                 options.LogoutPath = "/Auth/LogOut";
                 options.ExpireTimeSpan = TimeSpan.FromDays(1);
-			}); 
+			});
+
+            builder.Services.AddScoped<IFileService,FileService>();
 
             var app = builder.Build();
 
